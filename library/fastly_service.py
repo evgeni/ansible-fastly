@@ -1359,6 +1359,7 @@ class FastlyServiceModule(object):
                 vcl_snippets=dict(default=None, required=False, type='list'),
                 s3s=dict(default=None, required=False, type='list'),
                 syslogs=dict(default=None, required=False, type='list'),
+                cloudfiles=dict(default=None, required=False, type='list'),
                 settings=dict(default=None, required=False, type='dict'),
             ),
             supports_check_mode=True
