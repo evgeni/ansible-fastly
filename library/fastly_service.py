@@ -622,6 +622,7 @@ class FastlyCloudFilesLogging(FastlyObject):
         'path': dict(required=False, type='str', default='/'),
         'period': dict(required=False, type='int', default=3600),
         'placement': dict(required=False, type='str', default=None),
+        'region': dict(required=False, type='str', default=None, exclude_empty_str=True),
         'response_condition': dict(required=False, type='str', default=None, exclude_empty_str=True),
         'timestamp_format': dict(required=False, type='str', default='%Y-%m-%dT%H'),
         'user': dict(required=True, type='str', default=None),
@@ -638,6 +639,7 @@ class FastlyCloudFilesLogging(FastlyObject):
         self.path = self.read_config(config, validate_choices, 'path')
         self.period = self.read_config(config, validate_choices, 'period')
         self.placement = self.read_config(config, validate_choices, 'placement')
+        self.region = self.read_config(config, validate_choices, 'region')
         self.response_condition = self.read_config(config, validate_choices, 'response_condition')
         self.timestamp_format = self.read_config(config, validate_choices, 'timestamp_format')
         self.user = self.read_config(config, validate_choices, 'user')
