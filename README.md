@@ -238,6 +238,7 @@ $ ansible-galaxy install Jimdo.fastly
 | path                              | false    | string                                         | /                                    |
 | period                            | false    | integer                                        | 3600                                 |
 | placement                         | false    | string                                         |                                      |
+| region                            | false    | string                                         |                                      |
 | response_condition                | false    | string                                         | ''                                   |
 | timestamp_format                  | false    | string                                         | %Y-%m-%dT%H                          |
 | user                              | true     | string                                         |                                      |
