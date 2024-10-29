@@ -144,8 +144,8 @@ EXAMPLES = '''
         response: Moved Permanently
 '''
 
-import httplib
-import urllib
+import http.client as httplib
+import urllib.parse as urllib
 import json
 import os
 import traceback
@@ -239,7 +239,7 @@ class FastlyObject(object):
         return value
 
     def to_json(self):
-        return {k: v for k, v in self.__dict__.iteritems() if v or not self.schema[k].get('omit_empty', False)}
+        return {k: v for k, v in self.__dict__.items() if v or not self.schema[k].get('omit_empty', False)}
 
     def __eq__(self, other):
         return self.__dict__ == other.__dict__
@@ -704,7 +704,7 @@ class FastlyConfiguration(object):
 
     def to_yaml(self):
         result = {}
-        for key, value in self.__dict__.iteritems():
+        for key, value in self.__dict__.items():
             if isinstance(value, list):
                 result[key] = [item.to_json() for item in value]
             else:
@@ -773,7 +773,7 @@ class FastlyClient(object):
             return self.get_service(service_id)
         if response.status == 404:
             return None
-        raise Exception("Error searching for service '%s'" % service_name)
+        raise Exception("Error searching for service '%s' : %s" % (service_name, response.error()))
 
     def get_service(self, service_id):
         response = self._request('/service/%s/details' % urllib.quote(service_id, ''))
@@ -1400,7 +1400,7 @@ class FastlyServiceModule(object):
         except FastlyValidationError as err:
             self.module.fail_json(msg='Error in ' + err.cls + ': ' + err.message)
         except Exception as err:
-            self.module.fail_json(msg=err.message, trace=traceback.format_exc())
+            self.module.fail_json(msg=err, trace=traceback.format_exc())
 
     def run(self):
         try:
@@ -1426,7 +1426,7 @@ class FastlyServiceModule(object):
             self.module.exit_json(**module_result)
 
         except Exception as err:
-            self.module.fail_json(msg=err.message, trace=traceback.format_exc())
+            self.module.fail_json(msg=err, trace=traceback.format_exc())
 
 
 def main():
