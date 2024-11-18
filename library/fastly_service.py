@@ -265,6 +265,7 @@ class FastlyBackend(FastlyObject):
         'port': dict(required=False, type='int', default=80),
         'address': dict(required=True, type='str', default=None),
         'request_condition': dict(required=False, type='str', default=''),
+        'override_host': dict(required=False, type='str', default=None, exclude_empty_str=True),
         'ssl_hostname': dict(required=False, type='str', default=None),
         'ssl_ca_cert': dict(required=False, type='str', default=None, exclude_empty_str=True),
         'ssl_cert_hostname': dict(required=False, type='str', default=None, exclude_empty_str=True),
@@ -288,6 +289,7 @@ class FastlyBackend(FastlyObject):
         self.ssl_ca_cert = self.read_config(config, validate_choices, 'ssl_ca_cert')
         self.ssl_cert_hostname = self.read_config(config, validate_choices, 'ssl_cert_hostname')
         self.ssl_sni_hostname = self.read_config(config, validate_choices, 'ssl_sni_hostname')
+        self.override_host = self.read_config(config, validate_choices, 'override_host')
         self.shield = self.read_config(config, validate_choices, 'shield')
         self.healthcheck = self.read_config(config, validate_choices, 'healthcheck')
         self.weight = self.read_config(config, validate_choices, 'weight')
